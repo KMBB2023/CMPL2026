@@ -257,16 +257,22 @@ footer{
       ⭐ Pro Tournament
     </p>
 
-   <button class="btn" onclick="openPayment()">
+<button class="btn" onclick="openPayment()">
   💳 Pay ₹30
 </button>
 
-<div id="qrBox" style="display:none;text-align:center;margin-top:15px;">
-  <img id="qrImg.jpeg" style="width:180px;border-radius:10px;box-shadow:0 0 15px cyan;">
-  <p style="font-size:12px;opacity:0.8;margin-top:8px;">
-    Scan with any UPI App
+<div id="qrBox" style="display:none; margin-top:15px; text-align:center;">
+  <img
+    id="qrImg"
+    src=""
+    alt="UPI QR"
+    style="width:180px; border-radius:12px; box-shadow:0 0 15px cyan;"
+  >
+  <p style="font-size:12px; opacity:0.8; margin-top:8px;">
+    Scan with any UPI app
   </p>
 </div>
+
 
 
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSegE1quOhlztqxLAjrvfS3JUQ1RPAbIB1zG78DL_gd99AOx1A/viewform?usp=preview">
@@ -290,9 +296,9 @@ footer{
 </footer>
 
 <script>
-function openPayment(){
+function openPayment() {
 
-  var upi = "7606807842@ybl"; // ⚠️ Replace with real UPI
+  var upi = "7606807842@ybl"; // change only if needed
   var name = "CMPL Tournament";
   var amount = "30";
   var note = "CMPL Registration";
@@ -305,27 +311,35 @@ function openPayment(){
     "&tn=" + encodeURIComponent(note) +
     "&cu=INR";
 
-  // Generate QR using Google API
-  var qr =
+  var qrUrl =
     "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
     encodeURIComponent(upiLink);
 
-  // Show QR
-  document.getElementById("qrImg").src = qr;
-  document.getElementById("qrBox").style.display = "block";
+  var qrBox = document.getElementById("qrBox");
+  var qrImg = document.getElementById("qrImg");
 
-  // Try auto open on mobile
-  if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-    setTimeout(function(){
+  if (!qrBox || !qrImg) {
+    alert("QR elements not found. Check HTML IDs.");
+    return;
+  }
+
+  qrImg.src = qrUrl;
+  qrBox.style.display = "block";
+
+  // Try opening UPI app on mobile
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    setTimeout(function () {
       window.location.href = upiLink;
-    }, 600);
+    }, 700);
   }
 }
 </script>
 
 
+
 </body>
 </html>
+
 
 
 
