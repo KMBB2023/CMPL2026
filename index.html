@@ -282,24 +282,34 @@ footer{
 </footer>
 
 <script>
+function payNow() {
 
-function payNow(){
-
-  upi://pay?pa=7606807842@ybl&pn=Bishnu&am=30&cu=INR
+  var upi = "7606807842@ybl";   // ✅ correct UPI ID
+  var name = "Bishnu Prasad Pati";
+  var amount = "30";
+  var note = "CMPL Registration Fee";
 
   var url =
-    "upi://pay?pa=" + encodeURIComponent(upi) +
+    "upi://pay" +
+    "?pa=" + encodeURIComponent(upi) +
     "&pn=" + encodeURIComponent(name) +
     "&am=" + amount +
+    "&tn=" + encodeURIComponent(note) +
     "&cu=INR";
 
-  window.location.href = url;
+  // Mobile check
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    window.location.href = url;
+  } else {
+    alert("Please open this page on your mobile phone to make UPI payment.");
+  }
 }
-
 </script>
+
 
 </body>
 </html>
+
 
 
 
