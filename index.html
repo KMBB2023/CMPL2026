@@ -257,21 +257,17 @@ footer{
       ⭐ Pro Tournament
     </p>
 
-<button class="btn" onclick="openPayment()">
+<button class="btn" onclick="payNow()">
   💳 Pay ₹30
 </button>
 
-<div id="qrBox" style="display:none; margin-top:15px; text-align:center;">
-  <img
-    id="qrImg"
-    src="sdd.jpeg"
-    alt="UPI QR"
-    style="width:200px; border-radius:15px; box-shadow:0 0 15px cyan;"
-  >
-  <p style="font-size:12px; opacity:0.8; margin-top:8px;">
-    Scan with any UPI app
+<div id="qrBox" style="display:none;text-align:center;margin-top:15px;">
+  <img id="qrImg" style="width:180px;border-radius:10px;box-shadow:0 0 15px cyan;">
+  <p style="font-size:12px;opacity:0.8;margin-top:6px;">
+    Scan with any UPI App
   </p>
 </div>
+
 
 
 
@@ -296,12 +292,12 @@ footer{
 </footer>
 
 <script>
-function openPayment() {
+function payNow() {
 
-  var upi = "76068078422@ybl"; // change only if needed
-  var name = "CMPL Tournament";
+  var upi = "7606807842-2@ybl";   // Your UPI ID
+  var name = "CMPL Registration";
   var amount = "30";
-  var note = "CMPL Registration";
+  var note = "Tournament Fee";
 
   var upiLink =
     "upi://pay" +
@@ -311,26 +307,23 @@ function openPayment() {
     "&tn=" + encodeURIComponent(note) +
     "&cu=INR";
 
+  // Generate QR Code
   var qrUrl =
     "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
     encodeURIComponent(upiLink);
 
+  // Show QR
   var qrBox = document.getElementById("qrBox");
   var qrImg = document.getElementById("qrImg");
-
-  if (!qrBox || !qrImg) {
-    alert("QR elements not found. Check HTML IDs.");
-    return;
-  }
 
   qrImg.src = qrUrl;
   qrBox.style.display = "block";
 
-  // Try opening UPI app on mobile
+  // Try to open UPI app (mobile only)
   if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
     setTimeout(function () {
       window.location.href = upiLink;
-    }, 700);
+    }, 500);
   }
 }
 </script>
@@ -339,6 +332,7 @@ function openPayment() {
 
 </body>
 </html>
+
 
 
 
