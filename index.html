@@ -285,9 +285,8 @@ footer{
 
 function payNow(){
 
-  var upi = "7606807842-2@ybl";
-  var name = "bishnuprasadpati";
- var amount = "30";
+  upi://pay?pa=7606807842@ybl&pn=Bishnu&am=30&cu=INR
+
   var url =
     "upi://pay?pa=" + encodeURIComponent(upi) +
     "&pn=" + encodeURIComponent(name) +
@@ -301,6 +300,7 @@ function payNow(){
 
 </body>
 </html>
+
 
 
 
